@@ -229,8 +229,8 @@ importers:
         specifier: ^0.9.1
         version: 0.9.2(expo@54.0.37)(react-native@0.81.5)(react@19.1.0)
       expo-file-system:
-        specifier: ^56.0.8
-        version: 56.0.11(expo@54.0.37)(react-native@0.81.5)
+        specifier: ^57.0.6
+        version: 57.0.6(expo@54.0.37)(react-native@0.81.5)
       expo-font:
         specifier: ~14.0.12
         version: 14.0.12(expo@54.0.37)(react-native@0.81.5)(react@19.1.0)
@@ -9512,8 +9512,8 @@ packages:
       react-native: 0.81.5(@babel/core@7.29.7)(@types/react@19.1.17)(react@19.1.0)
     dev: false
 
-  /expo-file-system@56.0.11(expo@54.0.37)(react-native@0.81.5):
-    resolution: {integrity: sha512-0a0QQIUPxU8ds78hIVjSEFzs+vGCzwTVguCssmjhLJgUyUCEiC8en3xuRbBUCKw1YS+8HZVEZdMvF4qr9RzjXQ==}
+  /expo-file-system@57.0.6(expo@54.0.37)(react-native@0.81.5):
+    resolution: {integrity: sha512-pm8PMYEW6BnVOCBJ7df9FcDmQtE1tqImuYphlfYe1ipQRLYtdCayRczJcbKIsnB3mqEyp4gC2gWmMbsAsAOjVg==}
     peerDependencies:
       expo: '*'
       react-native: '*'
