@@ -1,0 +1,263 @@
+{
+  "brand": {
+    "republicName": "République d'Astoria"
+  },
+  "common": {
+    "skipToContent": "Aller au contenu",
+    "skipToFooter": "Aller au pied de page",
+    "backToTop": {
+      "ariaLabel": "Retour en haut de page"
+    }
+  },
+  "meta": {
+    "defaultTitle": "MyGouv — Le service public de vos démarches en ligne",
+    "suffix": "MyGouv",
+    "description": "MyGouv est le service public numérique qui vous aide à comprendre, découvrir et réaliser vos démarches en ligne, en toute sécurité, où que vous soyez.",
+    "searchPlaceholder": "Rechercher"
+  },
+  "header": {
+    "homeTitle": "Accueil — MyGouv",
+    "serviceTitle": "MyGouv",
+    "serviceTagline": "Le service public qui simplifie vos démarches du quotidien",
+    "mySpace": "Mon espace",
+    "signIn": "Se connecter",
+    "accountLabel": "Mon compte",
+    "logoutLink": "Se déconnecter",
+    "account": {
+      "demarches": "Mes démarches",
+      "obligations": "Mes obligations",
+      "paiements": "Mes paiements",
+      "documents": "Mes documents",
+      "notifications": "Mes notifications",
+      "entreprises": "Mes entreprises",
+      "profile": "Mon profil",
+      "settings": "Paramètres"
+    }
+  },
+  "nav": {
+    "primary": {
+      "home": "Accueil",
+      "discover": "Découvrir MyGouv",
+      "services": "Services",
+      "news": "Actualités",
+      "help": "Aide",
+      "about": "À propos"
+    },
+    "panel": {
+      "accueil": "Accueil",
+      "actualites": "Actualités",
+      "ministres": "Le Gouvernement",
+      "ministere": "Le ministère",
+      "rejoignezNous": "Rejoignez-nous",
+      "audienceParticulier": "Particuliers",
+      "audienceEntreprise": "Entreprises",
+      "actualiteMinistere": "Actualité du ministère",
+      "communiquesPresse": "Communiqués de presse",
+      "informationPortail": "Informations sur le portail",
+      "consultationsPubliques": "Consultations publiques",
+      "fournisseurs": "Fournisseurs",
+      "documentation": "Documentation",
+      "dataEconomie": "data.economie.gouv.aor",
+      "servicesPublicsPlus": "Services Publics +",
+      "discover": {
+        "presentation": "Présentation",
+        "fonctionnement": "Comment fonctionne MyGouv ?",
+        "fonctionnalites": "Fonctionnalités",
+        "surMobile": "MyGouv sur mobile",
+        "securiteConfidentialite": "Sécurité et confidentialité"
+      },
+      "services": {
+        "tousLesServices": "Tous les services",
+        "parDomaine": "Par domaine",
+        "parSituation": "Par situation",
+        "populaires": "Services populaires"
+      },
+      "help": {
+        "centreAide": "Centre d'aide",
+        "premiersPas": "Premiers pas",
+        "compteMyGouv": "Compte MyGouv",
+        "demarches": "Démarches",
+        "documents": "Documents",
+        "securite": "Sécurité"
+      },
+      "about": {
+        "mygouv": "MyGouv",
+        "mission": "Mission",
+        "gouvernance": "Gouvernance",
+        "accessibilite": "Accessibilité",
+        "confidentialite": "Confidentialité",
+        "securite": "Sécurité",
+        "transparence": "Transparence"
+      }
+    }
+  },
+  "footer": {
+    "columns": {
+      "rubriques": {
+        "title": "Rubriques"
+      },
+      "vousEtes": {
+        "title": "Vous êtes"
+      },
+      "pressePortail": {
+        "title": "Presse & portail"
+      },
+      "autresRessources": {
+        "title": "Autres ressources"
+      }
+    },
+    "contentDescription": "MyGouv est le service public numérique de la République d'Astoria : présentez-vous une fois, retrouvez vos informations et suivez vos démarches en ligne.",
+    "bottom": {
+      "contact": "Contact",
+      "planDuPortail": "Plan du site",
+      "documentsOpposables": "Documents opposables",
+      "privacy": "Confidentialité",
+      "cookies": "Gestion des cookies",
+      "publications": "Publications officielles"
+    },
+    "license": "Sauf mention contraire, tous les contenus de ce site sont sous <link>licence etalab-2.0</link>."
+  },
+  "home": {
+    "hero": {
+      "kicker": "Le service public numérique de la République d'Astoria",
+      "title": "Les services publics, simplement.",
+      "lead": "MyGouv vous permet d'accéder aux services publics, d'effectuer vos démarches, de retrouver vos documents et de suivre vos demandes depuis un même espace.",
+      "servicesCta": "Voir les services",
+      "discoverCta": "Découvrir MyGouv"
+    },
+    "domains": {
+      "kicker": "Accès rapide",
+      "title": "Vos services par domaine",
+      "lead": "Retrouvez les services publics par domaine, sans avoir à connaître l'administration responsable.",
+      "items": {
+        "etatCivil": "État civil",
+        "entreprises": "Entreprises",
+        "etudes": "Études et formation",
+        "travail": "Travail",
+        "fiscalite": "Fiscalité",
+        "logement": "Logement",
+        "sante": "Santé",
+        "mobilite": "Mobilité",
+        "famille": "Famille"
+      }
+    },
+    "explainer": {
+      "kicker": "Comprendre",
+      "title": "Qu'est-ce que MyGouv ?",
+      "lead": "MyGouv est l'interface commune entre les citoyens et l'administration : un point d'accès unique pour découvrir, comprendre, effectuer et suivre vos démarches.",
+      "items": {
+        "rechercher": {
+          "title": "Rechercher un service",
+          "desc": "Trouvez le service public qui correspond à votre besoin, sans connaître son organisation administrative."
+        },
+        "comprendre": {
+          "title": "Comprendre une démarche",
+          "desc": "Consultez les conditions, les pièces à fournir et les étapes de chaque démarche."
+        },
+        "effectuer": {
+          "title": "Effectuer vos démarches en ligne",
+          "desc": "Accédez directement aux services qui vous permettent de réaliser vos démarches depuis chez vous."
+        },
+        "suivre": {
+          "title": "Suivre vos demandes",
+          "desc": "Consultez à tout moment l'avancement de vos demandes depuis votre espace."
+        },
+        "retrouver": {
+          "title": "Retrouver vos documents",
+          "desc": "Retrouvez vos documents et vos notifications, rassemblés au même endroit."
+        }
+      },
+      "cta": "Comment fonctionne MyGouv ?"
+    },
+    "situations": {
+      "kicker": "Par situation",
+      "title": "Un service selon votre situation",
+      "lead": "Décrivez votre situation pour trouver le service adapté : inutile de connaître l'administration compétente.",
+      "items": {
+        "creerEntreprise": "Je crée mon entreprise",
+        "commencerEtudes": "Je commence mes études",
+        "chercherEmploi": "Je cherche un emploi",
+        "demenager": "Je déménage",
+        "changementSituation": "Je déclare un changement de situation",
+        "voyager": "Je voyage à l'étranger",
+        "devenirParent": "Je deviens parent",
+        "preparerRetraite": "Je prépare ma retraite"
+      }
+    },
+    "popular": {
+      "kicker": "Les plus utilisés",
+      "title": "Services populaires",
+      "lead": "Les démarches les plus fréquentes des citoyens.",
+      "items": {
+        "carteIdentite": "Carte d'identité",
+        "passeport": "Passeport",
+        "changementAdresse": "Changement d'adresse",
+        "creerEntreprise": "Créer une entreprise",
+        "declarerRevenus": "Déclarer ses revenus",
+        "demanderAllocation": "Demander une allocation",
+        "consulterDocuments": "Consulter ses documents"
+      },
+      "allCta": "Tous les services"
+    },
+    "news": {
+      "kicker": "Actualités",
+      "title": "Actualités et nouveautés",
+      "lead": "Suivez les évolutions de MyGouv : nouveaux services, nouvelles fonctionnalités et informations utiles.",
+      "empty": "Les actualités de MyGouv seront publiées ici prochainement.",
+      "allCta": "Toutes les actualités"
+    },
+    "benefits": {
+      "kicker": "Pourquoi MyGouv ?",
+      "title": "Pourquoi utiliser MyGouv ?",
+      "items": {
+        "espaceUnique": {
+          "title": "Un seul espace",
+          "desc": "Retrouvez tous vos services publics depuis une interface commune, sans cumuler les comptes."
+        },
+        "identiteSecurisee": {
+          "title": "Une identité sécurisée",
+          "desc": "Utilisez votre identité numérique pour accéder aux services qui nécessitent une authentification."
+        },
+        "demarches": {
+          "title": "Vos démarches au même endroit",
+          "desc": "Retrouvez vos demandes, vos documents et vos notifications en un seul lieu."
+        },
+        "experienceCoherente": {
+          "title": "Une expérience cohérente",
+          "desc": "Les services publics partagent une expérience numérique commune, accessible et homogène."
+        },
+        "accessiblePartout": {
+          "title": "Accessible partout",
+          "desc": "Accédez à MyGouv depuis votre ordinateur ou votre appareil mobile, à votre rythme."
+        }
+      }
+    },
+    "cta": {
+      "title": "Prêt à utiliser MyGouv ?",
+      "lead": "Découvrez les services publics disponibles ou connectez-vous à votre espace personnel pour suivre vos démarches.",
+      "servicesCta": "Découvrir les services"
+    }
+  },
+  "stayInTouch": {
+    "newsletter": {
+      "title": "Restez informé",
+      "desc": "Abonnez-vous à la lettre d'information MyGouv pour suivre les nouveautés et les évolutions du service.",
+      "label": "Votre adresse e-mail",
+      "placeholder": "prenom.nom@exemple.fr",
+      "submit": "S'abonner",
+      "invalidEmail": "Veuillez saisir une adresse e-mail valide.",
+      "success": "Merci ! Votre abonnement est confirmé.",
+      "hint": "Votre adresse ne sera utilisée que pour l'envoi de cette lettre d'information. Vous pourrez vous désabonner à tout moment."
+    },
+    "follow": {
+      "title": "Suivez-nous",
+      "items": {
+        "x": "Suivre MyGouv sur X",
+        "facebook": "Suivre MyGouv sur Facebook",
+        "linkedin": "Suivre MyGouv sur LinkedIn",
+        "instagram": "Suivre MyGouv sur Instagram",
+        "threads": "Suivre MyGouv sur Threads"
+      }
+    }
+  }
+}

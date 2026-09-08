@@ -9,13 +9,13 @@ export interface DomainConfig {
 
 const DOMAINS: Record<Environment, DomainConfig> = {
   production: {
-    main: 'economie.gouv.aor',
+    main: 'mygouv.gouv.aor',
     studios: 'studios.gouv.aor',
     sso: 'sso.gouv.aor',
     protocol: 'https',
   },
   localhost: {
-    main: 'economie.gouv.localhost',
+    main: 'mygouv.gouv.localhost',
     studios: 'studios.gouv.localhost',
     sso: 'sso.gouv.localhost',
     protocol: 'http',

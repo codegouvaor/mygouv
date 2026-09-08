@@ -3,7 +3,7 @@ package services
 import (
 	"context"
 
-	"github.com/codegouvaor/economie/server/src/models"
+	"github.com/codegouvaor/mygouv/server/src/models"
 	"gorm.io/gorm"
 )
 

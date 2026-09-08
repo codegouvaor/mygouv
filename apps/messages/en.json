@@ -1,0 +1,263 @@
+{
+  "brand": {
+    "republicName": "Republic of Astoria"
+  },
+  "common": {
+    "skipToContent": "Skip to content",
+    "skipToFooter": "Skip to footer",
+    "backToTop": {
+      "ariaLabel": "Back to top"
+    }
+  },
+  "meta": {
+    "defaultTitle": "MyGouv — The public service for your online procedures",
+    "suffix": "MyGouv",
+    "description": "MyGouv is the digital public service that helps you understand, discover and complete your online procedures securely, wherever you are.",
+    "searchPlaceholder": "Search"
+  },
+  "header": {
+    "homeTitle": "Home — MyGouv",
+    "serviceTitle": "MyGouv",
+    "serviceTagline": "The public service that makes your everyday procedures simpler",
+    "mySpace": "My account",
+    "signIn": "Log in",
+    "accountLabel": "My account",
+    "logoutLink": "Log out",
+    "account": {
+      "demarches": "My procedures",
+      "obligations": "My obligations",
+      "paiements": "My payments",
+      "documents": "My documents",
+      "notifications": "My notifications",
+      "entreprises": "My companies",
+      "profile": "My profile",
+      "settings": "Settings"
+    }
+  },
+  "nav": {
+    "primary": {
+      "home": "Home",
+      "discover": "Discover MyGouv",
+      "services": "Services",
+      "news": "News",
+      "help": "Help",
+      "about": "About"
+    },
+    "panel": {
+      "accueil": "Home",
+      "actualites": "News",
+      "ministres": "The Government",
+      "ministere": "The ministry",
+      "rejoignezNous": "Join us",
+      "audienceParticulier": "Individuals",
+      "audienceEntreprise": "Companies",
+      "actualiteMinistere": "Ministry news",
+      "communiquesPresse": "Press releases",
+      "informationPortail": "About the portal",
+      "consultationsPubliques": "Public consultations",
+      "fournisseurs": "Suppliers",
+      "documentation": "Documentation",
+      "dataEconomie": "data.economie.gouv.aor",
+      "servicesPublicsPlus": "Services Publics +",
+      "discover": {
+        "presentation": "Overview",
+        "fonctionnement": "How does MyGouv work?",
+        "fonctionnalites": "Features",
+        "surMobile": "MyGouv on mobile",
+        "securiteConfidentialite": "Security and privacy"
+      },
+      "services": {
+        "tousLesServices": "All services",
+        "parDomaine": "By area",
+        "parSituation": "By life event",
+        "populaires": "Popular services"
+      },
+      "help": {
+        "centreAide": "Help centre",
+        "premiersPas": "Getting started",
+        "compteMyGouv": "MyGouv account",
+        "demarches": "Procedures",
+        "documents": "Documents",
+        "securite": "Security"
+      },
+      "about": {
+        "mygouv": "MyGouv",
+        "mission": "Mission",
+        "gouvernance": "Governance",
+        "accessibilite": "Accessibility",
+        "confidentialite": "Privacy",
+        "securite": "Security",
+        "transparence": "Transparency"
+      }
+    }
+  },
+  "footer": {
+    "columns": {
+      "rubriques": {
+        "title": "Sections"
+      },
+      "vousEtes": {
+        "title": "You are"
+      },
+      "pressePortail": {
+        "title": "Press & portal"
+      },
+      "autresRessources": {
+        "title": "Other resources"
+      }
+    },
+    "contentDescription": "MyGouv is the digital public service of the Republic of Astoria: introduce yourself once, find your information and track your procedures online.",
+    "bottom": {
+      "contact": "Contact",
+      "planDuPortail": "Sitemap",
+      "documentsOpposables": "Applicable documents",
+      "privacy": "Privacy",
+      "cookies": "Cookie management",
+      "publications": "Official publications"
+    },
+    "license": "Unless otherwise stated, all content on this site is available under the <link>etalab-2.0 licence</link>."
+  },
+  "home": {
+    "hero": {
+      "kicker": "The digital public service of the Republic of Astoria",
+      "title": "Public services, simply.",
+      "lead": "MyGouv lets you access public services, complete your procedures, find your documents and track your requests from a single space.",
+      "servicesCta": "Browse services",
+      "discoverCta": "Discover MyGouv"
+    },
+    "domains": {
+      "kicker": "Quick access",
+      "title": "Your services by area",
+      "lead": "Find public services by area — no need to know which administration is responsible.",
+      "items": {
+        "etatCivil": "Civil registration",
+        "entreprises": "Business",
+        "etudes": "Education and training",
+        "travail": "Work",
+        "fiscalite": "Tax",
+        "logement": "Housing",
+        "sante": "Health",
+        "mobilite": "Mobility",
+        "famille": "Family"
+      }
+    },
+    "explainer": {
+      "kicker": "Understand",
+      "title": "What is MyGouv?",
+      "lead": "MyGouv is the shared interface between citizens and the administration: a single entry point to discover, understand, complete and track your procedures.",
+      "items": {
+        "rechercher": {
+          "title": "Find a service",
+          "desc": "Find the public service that matches your need, without knowing how the administration is organised."
+        },
+        "comprendre": {
+          "title": "Understand a procedure",
+          "desc": "Check the conditions, required documents and steps of each procedure."
+        },
+        "effectuer": {
+          "title": "Complete your procedures online",
+          "desc": "Access the services that let you complete your procedures from home."
+        },
+        "suivre": {
+          "title": "Track your requests",
+          "desc": "Check the progress of your requests at any time from your space."
+        },
+        "retrouver": {
+          "title": "Find your documents",
+          "desc": "Find your documents and notifications, gathered in one place."
+        }
+      },
+      "cta": "How does MyGouv work?"
+    },
+    "situations": {
+      "kicker": "By life event",
+      "title": "A service for your situation",
+      "lead": "Tell us about your situation to find the right service — you do not need to know which administration is in charge.",
+      "items": {
+        "creerEntreprise": "I am starting a business",
+        "commencerEtudes": "I am starting my studies",
+        "chercherEmploi": "I am looking for a job",
+        "demenager": "I am moving home",
+        "changementSituation": "I am reporting a change of situation",
+        "voyager": "I am travelling abroad",
+        "devenirParent": "I am becoming a parent",
+        "preparerRetraite": "I am planning my retirement"
+      }
+    },
+    "popular": {
+      "kicker": "Most used",
+      "title": "Popular services",
+      "lead": "The most common procedures for citizens.",
+      "items": {
+        "carteIdentite": "Identity card",
+        "passeport": "Passport",
+        "changementAdresse": "Change of address",
+        "creerEntreprise": "Starting a business",
+        "declarerRevenus": "Filing your income",
+        "demanderAllocation": "Applying for a benefit",
+        "consulterDocuments": "Viewing your documents"
+      },
+      "allCta": "All services"
+    },
+    "news": {
+      "kicker": "News",
+      "title": "News and updates",
+      "lead": "Follow MyGouv's evolution: new services, new features and useful information.",
+      "empty": "MyGouv news will be published here soon.",
+      "allCta": "All news"
+    },
+    "benefits": {
+      "kicker": "Why MyGouv?",
+      "title": "Why use MyGouv?",
+      "items": {
+        "espaceUnique": {
+          "title": "One single space",
+          "desc": "Find all your public services through a common interface, without juggling multiple accounts."
+        },
+        "identiteSecurisee": {
+          "title": "A secure identity",
+          "desc": "Use your digital identity to access services that require authentication."
+        },
+        "demarches": {
+          "title": "Your procedures in one place",
+          "desc": "Find your requests, documents and notifications in a single place."
+        },
+        "experienceCoherente": {
+          "title": "A consistent experience",
+          "desc": "Public services share a common, accessible and consistent digital experience."
+        },
+        "accessiblePartout": {
+          "title": "Available everywhere",
+          "desc": "Access MyGouv from your computer or your mobile device, at your own pace."
+        }
+      }
+    },
+    "cta": {
+      "title": "Ready to use MyGouv?",
+      "lead": "Discover the available public services or log in to your personal space to track your procedures.",
+      "servicesCta": "Discover the services"
+    }
+  },
+  "stayInTouch": {
+    "newsletter": {
+      "title": "Stay informed",
+      "desc": "Subscribe to the MyGouv newsletter to follow the service's latest news and updates.",
+      "label": "Your email address",
+      "placeholder": "firstname.lastname@example.fr",
+      "submit": "Subscribe",
+      "invalidEmail": "Please enter a valid email address.",
+      "success": "Thank you! Your subscription is confirmed.",
+      "hint": "Your address will only be used to send this newsletter. You can unsubscribe at any time."
+    },
+    "follow": {
+      "title": "Follow us",
+      "items": {
+        "x": "Follow MyGouv on X",
+        "facebook": "Follow MyGouv on Facebook",
+        "linkedin": "Follow MyGouv on LinkedIn",
+        "instagram": "Follow MyGouv on Instagram",
+        "threads": "Follow MyGouv on Threads"
+      }
+    }
+  }
+}

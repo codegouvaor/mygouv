@@ -31,10 +31,10 @@ type DomainGroup = "sso" | "studios" | "main";
 const SSO_HOSTS = ["sso.gouv.localhost", "sso.gouv.lan"];
 const STUDIOS_HOSTS = ["studios.gouv.localhost", "studios.gouv.lan"];
 const MAIN_HOSTS = [
-  "info.gouv.localhost",
-  "info.gouv.lan",
-  "info.gouv.aor",
-  "www.info.gouv.aor",
+  "mygouv.gouv.localhost",
+  "mygouv.gouv.lan",
+  "mygouv.gouv.aor",
+  "www.mygouv.gouv.aor",
 ];
 
 const AUTH_PATHS = [
@@ -68,7 +68,7 @@ function getDomainForGroup(group: DomainGroup, currentUrl: URL): string {
       case "studios":
         return `${protocol}//studios.gouv.localhost`;
       case "main":
-        return `${protocol}//info.gouv.localhost`;
+        return `${protocol}//mygouv.gouv.localhost`;
     }
   }
 
@@ -96,8 +96,8 @@ function getTargetGroup(pathname: string): DomainGroup | null {
  * Auth helpers
  * -------------------------------------------------------------------------- */
 
-const REFRESH_COOKIE = "kami_sama_refresh";
-const ACCESS_TOKEN_COOKIE = "kami_sama_access_token";
+const REFRESH_COOKIE = "mygouv_refresh";
+const ACCESS_TOKEN_COOKIE = "mygouv_access_token";
 
 function isAuthCookiePresent(request: NextRequest): boolean {
   const refresh = request.cookies.get(REFRESH_COOKIE);

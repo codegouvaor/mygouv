@@ -6,153 +6,95 @@ import { SkipLinks } from "@codegouvaor/react-ads/SkipLinks";
 import { headerFooterDisplayItem } from "@codegouvaor/react-ads/Display";
 import type { HeaderProps } from "@codegouvaor/react-ads/Header";
 import type { MainNavigationProps } from "@codegouvaor/react-ads/MainNavigation";
-import type { MegaMenuProps } from "@codegouvaor/react-ads/MainNavigation/MegaMenu";
 import { useTranslations } from "next-intl";
-import { usePathname, useRouter } from "@/i18n/navigation";
+import { usePathname } from "@/i18n/navigation";
 import { getDomainUrl } from "@/lib/domains";
-import { pageAnchors, primaryNavigation, searchPath } from "@/lib/site-structure";
+import {
+  headerActions,
+  pageAnchors,
+  primaryNavigation,
+  type PrimaryNavigationItem,
+  type SiteNavigationItem,
+} from "@/lib/site-structure";
 import { useAuth } from "@/context/AuthContext";
 import { UserAccountMenu } from "@/components/public/header/user-account-menu";
 import { siteAccountConfig } from "@/lib/site-config";
 
-/** Whether the current pathname corresponds to a navigation href. */
-const isNavItemActive = (href: string, pathname: string): boolean =>
+/** Whether a pathname is the destination itself or lives under it. */
+const isPathActive = (href: string, pathname: string): boolean =>
   href === "/" ? pathname === "/" : pathname === href || pathname.startsWith(`${href}/`);
 
 /**
- * Collect every href reachable from a mega-menu item (categories, featured
- * link, leader link) so the parent tab can be marked active when the user
- * lands on any child page — even if the child href lives outside the
- * parent's own path tree (e.g. /decryptages under Actualites -> /news).
+ * Whether the current pathname matches an entry or any of its sub-entries.
+ *
+ * Sub-entries are the *planned* pages of a section: they are not rendered by
+ * the header yet (their routes do not exist), but counting them keeps the
+ * parent tab highlighted as soon as the visitor lands on any page of the
+ * section tree.
  */
-function collectChildHrefs(item: (typeof primaryNavigation)[number]): string[] {
-  if (item.type === "link") return [];
-  const hrefs: string[] = [item.leader.link.href];
-  if (item.featuredLink) hrefs.push(item.featuredLink.href);
-  for (const cat of item.categories ?? []) {
-    if (cat.mainLink) hrefs.push(cat.mainLink.href);
-    for (const link of cat.links) hrefs.push(link.href);
-  }
-  return hrefs;
+function isNavItemActive(item: SiteNavigationItem, pathname: string): boolean {
+  if (isPathActive(item.href, pathname)) return true;
+  return (item.children ?? []).some((child) => isNavItemActive(child, pathname));
 }
 
 /**
- * Government Header of the Ministry of Economy and Finance (Astoria).
+ * Header of the MyGouv public portal.
  *
- * Main navigation — the permanent architecture of the ministry application,
- * six domains, each regrouping its missions and services into a single
- * coherent entry point (no separate portals for taxes, customs, budget…):
+ * Main navigation — the permanent editorial architecture of the portal,
+ * straight from the `site-structure` configuration:
  *
- *   Économie             -> Politique économique, croissance, emploi, innovation
- *   Fiscalité            -> Impôts, taxes, déclarations et paiements
- *   Entreprises          -> Créer, gérer, financer, exporter
- *   Finances publiques   -> Budget de l'État, dette, transparence
- *   Commerce & Douanes   -> Commerce intérieur et international, douanes
- *   Données & Ressources -> Données, statistiques, études, réglementation
+ *   Accueil
+ *   Découvrir MyGouv   → the service, how it works, features, mobile
+ *   Services           → the citizen-facing catalogue of public services
+ *   Actualités         → news of the service (editorial content, coming)
+ *   Aide               → support and documentation
+ *   À propos           → institutional presentation of MyGouv
  *
- * The six domains are flanked by two transversal actions: the global search
- * (ministry-wide search over pages, services, démarches, data…) and
- * "Mon espace", the personal space designed to work with MyGouv.
+ * Every entry is rendered as a plain link to its section landing page. The
+ * `children` arrays of `primaryNavigation` describe the *planned* sub-pages
+ * (future dropdown / mega-menu content): they are not rendered until their
+ * routes actually exist, so the site never exposes broken links.
  *
- * When the user is authenticated, the "Mon espace" link in the quick-access
- * toolbar is hidden and a custom account menu (`UserAccountMenu`) is
- * rendered instead, presenting the personal-space entries (mes démarches,
- * mes obligations, mes paiements…). The menu content is driven by
- * `siteAccountConfig` so each site can present a different account
- * interface without touching this component.
+ * The right side of the header carries the transversal actions, clearly
+ * separated from the navigation:
+ *  - “Se connecter” (`headerActions.signIn`), the primary action of the
+ *    header: it is the transition towards the MyGouv personal space, hosted
+ *    on the SSO domain;
+ *  - the accessibility/display settings button of ADS.
+ *
+ * When the user is authenticated, the “Se connecter” action is hidden and a
+ * custom account menu (`UserAccountMenu`) is rendered instead, presenting
+ * the personal-space entries driven by `siteAccountConfig` — the public
+ * navigation and the authenticated area stay distinct.
  */
 export function GovernmentHeader() {
   const t = useTranslations();
   const tPrimaryNav = useTranslations("nav.primary");
-  const tNavPanel = useTranslations("nav.panel");
   const tBrand = useTranslations("brand");
   const pathname = usePathname();
-  const router = useRouter();
 
-  const navigationItems: MainNavigationProps.Item[] = primaryNavigation.map((item) => {
-    const childHrefs = collectChildHrefs(item);
-    const isActive =
-      isNavItemActive(item.href, pathname) ||
-      childHrefs.some((href) => isNavItemActive(href, pathname));
-
-    const common = {
-      isActive,
+  const navigationItems: MainNavigationProps.Item[] = primaryNavigation.map(
+    (item: PrimaryNavigationItem) => ({
+      isActive: isNavItemActive(item, pathname),
       text: tPrimaryNav(item.labelKey),
-    };
+      linkProps: { href: item.href },
+    })
+  );
 
-    if (item.type === "link") {
-      return { ...common, linkProps: { href: item.href } };
-    }
-
-    const categories: MegaMenuProps.Category[] = [
-      ...(item.featuredLink
-        ? [
-            {
-              // Column heading — intentionally not a link: it labels the
-              // featured item below it rather than being a destination.
-              categoryMainText: tNavPanel(item.featuredLink.titleKey),
-              links: [
-                {
-                  text: t("home.news.featured.title"),
-                  linkProps: { href: item.featuredLink.href },
-                  isActive: isNavItemActive(item.featuredLink.href, pathname),
-                },
-              ],
-            } satisfies MegaMenuProps.Category,
-          ]
-        : []),
-      ...(item.categories ?? []).map((category): MegaMenuProps.Category => {
-        // Column headings are rendered as plain text (`categoryMainText`),
-        // never as links: they introduce the links beneath them and are not
-        // destinations themselves.
-        const headingKey = category.mainLink ? category.mainLink.labelKey : category.titleKey;
-        return {
-          categoryMainText: tNavPanel(headingKey),
-          links: category.links.map((link) => ({
-            text: tNavPanel(link.labelKey),
-            linkProps: { href: link.href },
-            isActive: isNavItemActive(link.href, pathname),
-          })),
-        };
-      }),
-    ];
-
-    return {
-      ...common,
-      megaMenu: {
-        leader: {
-          title: tNavPanel(item.leader.titleKey),
-          paragraph: tNavPanel(item.leader.paragraphKey),
-          link: {
-            text: tNavPanel(item.leader.link.labelKey),
-            linkProps: { href: item.leader.link.href },
-          },
-        },
-        categories,
-      },
-    };
-  });
-
-  const handleSearch = (text: string) => {
-    const query = text.trim();
-    router.push(query ? `${searchPath}?q=${encodeURIComponent(query)}` : searchPath);
-  };
-
-  // Auth state for conditional account UI
+  // Auth state for conditional account UI.
   const { isAuthenticated, isLoading: isAuthLoading } = useAuth();
 
-  // Quick-access items — “Mon espace” is a transversal action: it points to
-  // the SSO personal space when the user is not authenticated, and is
-  // replaced by the account menu (with its personal-space entries) once the
-  // user is authenticated.
-  const quickAccessItems = React.useMemo(() => {
+  // Quick-access items — transversal header actions, not navigation entries.
+  // “Se connecter” points to the SSO personal space when the visitor is not
+  // authenticated; it is replaced by the account menu once they are.
+  const quickAccessItems = React.useMemo<HeaderProps.QuickAccessItem[]>(() => {
     const items: HeaderProps.QuickAccessItem[] = [];
 
     if (!isAuthenticated || isAuthLoading) {
       items.push({
         iconId: "fr-icon-account-circle-line",
-        text: t("header.mySpace"),
-        linkProps: { href: getDomainUrl("sso", "/login") },
+        text: t(`header.${headerActions.signIn.labelKey}`),
+        linkProps: { href: getDomainUrl("sso", headerActions.signIn.path) },
       });
     }
 
@@ -183,10 +125,6 @@ export function GovernmentHeader() {
         serviceTagline={t("header.serviceTagline")}
         navigation={navigationItems}
         quickAccessItems={quickAccessItems}
-        renderSearchInput={(params) => (
-          <input {...params} placeholder={t("meta.searchPlaceholder")} />
-        )}
-        onSearchButtonClick={handleSearch}
       />
       {/* Account menu — rendered outside the ADS Header so it can use
           its own dropdown positioning and auth state without conflicting
