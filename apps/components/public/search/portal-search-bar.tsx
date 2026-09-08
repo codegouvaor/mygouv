@@ -5,6 +5,18 @@ import { useRouter } from "@/i18n/navigation";
 import { searchPath } from "@/lib/site-structure";
 
 /**
+ * Canonical destination of a portal search: the localized `/search` route,
+ * carrying the trimmed query when there is one.
+ *
+ * Single source of truth of the search submission — used both by the
+ * standalone `PortalSearchBar` and by the Government Header search.
+ */
+export function getPortalSearchPath(query: string): string {
+  const trimmed = query.trim();
+  return trimmed ? `${searchPath}?q=${encodeURIComponent(trimmed)}` : searchPath;
+}
+
+/**
  * Portal search input. The behaviour comes from the ADS `SearchBar`; on submit
  * the query is pushed to the localized `/search` route which renders the
  * results (empty state while the search index is not wired).
@@ -22,8 +34,7 @@ export function PortalSearchBar({
   const router = useRouter();
 
   const handleSearch = (text: string) => {
-    const query = text.trim();
-    router.push(query ? `${searchPath}?q=${encodeURIComponent(query)}` : searchPath);
+    router.push(getPortalSearchPath(text));
   };
 
   return (

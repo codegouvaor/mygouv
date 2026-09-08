@@ -12,32 +12,39 @@
  *
  * Editorial model of the portal
  * -----------------------------
- * The public website presents MyGouv and gives access to it:
+ * The public website presents MyGouv and gives access to it, organised as a
+ * two-level navigation tree — never as a flat list of pages:
  *
  *   site
- *   ├── primaryNavigation     — the six sections of the site
- *   │   ├── home
- *   │   ├── discover
- *   │   ├── services
- *   │   ├── news
- *   │   ├── help
- *   │   └── about
- *   └── actions
- *       └── signIn            — transition towards the personal space (SSO)
+ *   ├── home                   — Accueil, the single entry to the portal
+ *   ├── sections               — five thematic sections
+ *   │   ├── discover           — understand what MyGouv is
+ *   │   │   ├── subject        — MyGouv, Fonctionnement, Fonctionnalités,
+ *   │   │   └── …                Sécurité & confidentialité
+ *   │   ├── services           — the citizen-facing catalogue of services
+ *   │   ├── news               — news of the service (editorial, coming)
+ *   │   ├── help               — support and assistance
+ *   │   └── about              — MyGouv as a public digital service
+ *   └── actions                — transversal actions of the header, kept
+ *       ├── language               distinct from the navigation sections:
+ *       └── signIn                 switch language, reach the personal space
+ *
+ * The `children` of a section are its *subjects*: the destinations a visitor
+ * can reach from the section menu. The header renders them (desktop dropdown
+ * and mobile sub-menus consume exactly the same data), so the site always
+ * reflects this single model. Every subject whose page is not published yet
+ * keeps its canonical URL here — shipping the page only changes the route
+ * files, never the navigation model.
  *
  * `primaryNavigation` stays distinct from the authenticated area: the public
- * sections (understand, discover, search, inform, access) are never mixed
- * with the personal-space entries (use, track, manage) which belong to the
- * account configuration (`@/lib/site-config.ts`) and the SSO/studios
- * applications.
- *
- * Section landing pages and their sub-pages do not all exist yet: the
- * structure below is the *planned* architecture of the portal. Entries whose
- * destination page is not published yet are kept in the model (they define
- * the future sub-menus) but must not be rendered by the header before their
- * route actually exists, so the site never exposes broken links.
+ * sections (understand, discover, search, access) are never mixed with the
+ * personal-space entries (use, track, manage) which belong to the account
+ * configuration (`@/lib/site-config.ts`) and the SSO/studios applications.
  */
 export const PORTAL_HOME = "/";
+
+/** Results page of the localized portal search (see `PortalSearchBar`). */
+export const searchPath = "/search";
 
 /** A leaf or nested entry of a navigation tree. */
 export type SiteNavigationItem = {
@@ -50,9 +57,9 @@ export type SiteNavigationItem = {
   /** Locale-agnostic pathname of the destination. */
   href: string;
   /**
-   * Optional sub-entries. They model the future sub-pages of the section
-   * (dropdown / mega-menu content) and are only rendered by consumers once
-   * the corresponding routes exist.
+   * Optional sub-entries: the subjects of the section. When present they are
+   * rendered as the menu content of the section (ADS `Menu`); an entry
+   * without children is rendered as a plain link (e.g. Accueil).
    */
   children?: ReadonlyArray<SiteNavigationItem>;
 };
@@ -67,7 +74,7 @@ export type PrimaryNavigationItem = SiteNavigationItem & {
   id: "home" | "discover" | "services" | "news" | "help" | "about";
 };
 
-/** Planned roots of the five public sections (besides home, the `/` route). */
+/** Roots of the five public sections (besides home, the `/` route). */
 export const sectionPaths = {
   discover: "/decouvrir-mygouv",
   services: "/services",
@@ -83,6 +90,11 @@ export const sectionPaths = {
  *
  * The SSO login page lives on its own domain: only the *path* is stored here,
  * the header resolves the full URL through `getDomainUrl("sso", …)`.
+ *
+ * The other header action — switching language — is not a link and carries no
+ * label: it is rendered by the `LocaleSwitcher`, whose options come from the
+ * centralized i18n routing (`@/i18n/routing`). Both stay out of the
+ * `primaryNavigation` list.
  */
 export const headerActions = {
   signIn: {
@@ -124,26 +136,29 @@ export type FooterColumn = {
  *
  * The public site is organised around six entries:
  *
- *   Accueil
- *   Découvrir MyGouv   → presentation of the service and how it works
- *   Services           → the citizen-facing catalogue of public services
- *   Actualités         → news of the service (editorial content, coming)
- *   Aide               → support, help and documentation
- *   À propos           → institutional presentation of MyGouv
+ *   Accueil             → single entry to the portal (plain link, `/`)
+ *   Découvrir MyGouv    → what MyGouv is, how it works, its features,
+ *                         security & privacy
+ *   Services            → the citizen-facing catalogue of public services,
+ *                         organised by the citizen journey, not by ministry
+ *   Actualités          → news of the service (editorial content, coming)
+ *   Aide                → support, help and documentation
+ *   À propos            → institutional presentation of MyGouv
  *
- * Every top-level entry is a link to its section landing page. The
- * `children` arrays below describe the editorial content each section is
- * meant to carry (they will feed dropdown / mega-menus as soon as the
- * corresponding pages exist) — none of them is rendered by the header today,
- * because their routes do not exist yet.
+ * Accueil stays a plain entry; the five thematic sections each carry four
+ * subjects in their `children` array. The header renders each section as a
+ * dropdown (ADS `Menu`) fed by these subjects on desktop and as an
+ * expandable section in the mobile menu — one model, both breakpoints.
  *
  * Top-level labels resolve under `nav.primary.<id>`, sub-entries under
- * `nav.panel.<id>.<labelKey>`.
+ * `nav.panel.<id>.<labelKey>`. The first subject of a section is its
+ * overview entry and points back to the section root, so the section landing
+ * page always stays reachable from the menu.
  *
- * The `Services` section is deliberately citizen-oriented: its future
- * sub-navigation is organised by user life events and domains of the citizen
- * journey, not by ministries. Ministries are not a navigation axis of the
- * public portal.
+ * The `Services` section is deliberately citizen-oriented: its sub-navigation
+ * is organised for the user of the public services (all the services, by
+ * domain, by life situation, popular services) and not for the administration
+ * responsible for them. Ministries are not a navigation axis of the portal.
  */
 export const primaryNavigation: ReadonlyArray<PrimaryNavigationItem> = [
   {
@@ -156,10 +171,11 @@ export const primaryNavigation: ReadonlyArray<PrimaryNavigationItem> = [
     labelKey: "discover",
     href: sectionPaths.discover,
     children: [
-      { labelKey: "presentation", href: `${sectionPaths.discover}/presentation` },
+      // “MyGouv” — what the service is — is the overview of the section:
+      // it leads to the section landing page itself.
+      { labelKey: "mygouv", href: sectionPaths.discover },
       { labelKey: "fonctionnement", href: `${sectionPaths.discover}/comment-ca-marche` },
       { labelKey: "fonctionnalites", href: `${sectionPaths.discover}/fonctionnalites` },
-      { labelKey: "surMobile", href: `${sectionPaths.discover}/sur-mobile` },
       { labelKey: "securiteConfidentialite", href: `${sectionPaths.discover}/securite-et-confidentialite` },
     ],
   },
@@ -177,23 +193,29 @@ export const primaryNavigation: ReadonlyArray<PrimaryNavigationItem> = [
     ],
   },
   {
-    // Editorial news (actualités MyGouv, nouveaux services, maintenance…)
-    // will land here when the editorial system exists. No sub-navigation is
-    // introduced before that.
+    // Editorial news of MyGouv itself (actualités, nouveautés, agenda,
+    // état du service) will land under this section as the editorial system
+    // ships. The subjects below fix the architecture of the section.
     id: "news",
     labelKey: "news",
     href: sectionPaths.news,
+    children: [
+      // “Actualités” — the news list — is the section hub.
+      { labelKey: "actualites", href: sectionPaths.news },
+      { labelKey: "nouveautes", href: `${sectionPaths.news}/nouveautes` },
+      { labelKey: "agenda", href: `${sectionPaths.news}/agenda` },
+      { labelKey: "etatDuService", href: `${sectionPaths.news}/etat-du-service` },
+    ],
   },
   {
     id: "help",
     labelKey: "help",
     href: sectionPaths.help,
     children: [
-      { labelKey: "centreAide", href: `${sectionPaths.help}/centre-d-aide` },
+      // “Centre d'aide” is the section hub: `/aide` is the assistance entry.
+      { labelKey: "centreAide", href: sectionPaths.help },
       { labelKey: "premiersPas", href: `${sectionPaths.help}/premiers-pas` },
       { labelKey: "compteMyGouv", href: `${sectionPaths.help}/compte-mygouv` },
-      { labelKey: "demarches", href: `${sectionPaths.help}/demarches` },
-      { labelKey: "documents", href: `${sectionPaths.help}/documents` },
       { labelKey: "securite", href: `${sectionPaths.help}/securite` },
     ],
   },
@@ -202,12 +224,12 @@ export const primaryNavigation: ReadonlyArray<PrimaryNavigationItem> = [
     labelKey: "about",
     href: sectionPaths.about,
     children: [
-      { labelKey: "mygouv", href: `${sectionPaths.about}/mygouv` },
+      // “Présentation” is the section hub: `/a-propos` presents MyGouv.
+      // Accessibility, privacy and security detail pages will be added to
+      // this section (or kept under the legal links) as they ship.
+      { labelKey: "presentation", href: sectionPaths.about },
       { labelKey: "mission", href: `${sectionPaths.about}/mission` },
       { labelKey: "gouvernance", href: `${sectionPaths.about}/gouvernance` },
-      { labelKey: "accessibilite", href: `${sectionPaths.about}/accessibilite` },
-      { labelKey: "confidentialite", href: `${sectionPaths.about}/confidentialite` },
-      { labelKey: "securite", href: `${sectionPaths.about}/securite` },
       { labelKey: "transparence", href: `${sectionPaths.about}/transparence` },
     ],
   },

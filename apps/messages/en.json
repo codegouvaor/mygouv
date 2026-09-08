@@ -60,11 +60,10 @@
       "dataEconomie": "data.economie.gouv.aor",
       "servicesPublicsPlus": "Services Publics +",
       "discover": {
-        "presentation": "Overview",
-        "fonctionnement": "How does MyGouv work?",
+        "mygouv": "MyGouv",
+        "fonctionnement": "How it works",
         "fonctionnalites": "Features",
-        "surMobile": "MyGouv on mobile",
-        "securiteConfidentialite": "Security and privacy"
+        "securiteConfidentialite": "Security & privacy"
       },
       "services": {
         "tousLesServices": "All services",
@@ -76,18 +75,19 @@
         "centreAide": "Help centre",
         "premiersPas": "Getting started",
         "compteMyGouv": "MyGouv account",
-        "demarches": "Procedures",
-        "documents": "Documents",
         "securite": "Security"
       },
       "about": {
-        "mygouv": "MyGouv",
+        "presentation": "Overview",
         "mission": "Mission",
         "gouvernance": "Governance",
-        "accessibilite": "Accessibility",
-        "confidentialite": "Privacy",
-        "securite": "Security",
         "transparence": "Transparency"
+      },
+      "news": {
+        "actualites": "News",
+        "nouveautes": "What's new",
+        "agenda": "Agenda",
+        "etatDuService": "Service status"
       }
     }
   },

@@ -7,13 +7,13 @@ import { headerFooterDisplayItem } from "@codegouvaor/react-ads/Display";
 import type { HeaderProps } from "@codegouvaor/react-ads/Header";
 import type { MainNavigationProps } from "@codegouvaor/react-ads/MainNavigation";
 import { useTranslations } from "next-intl";
-import { usePathname } from "@/i18n/navigation";
+import { usePathname, useRouter } from "@/i18n/navigation";
 import { getDomainUrl } from "@/lib/domains";
+import { getPortalSearchPath } from "@/components/public/search/portal-search-bar";
 import {
   headerActions,
   pageAnchors,
   primaryNavigation,
-  type PrimaryNavigationItem,
   type SiteNavigationItem,
 } from "@/lib/site-structure";
 import { useAuth } from "@/context/AuthContext";
@@ -25,12 +25,9 @@ const isPathActive = (href: string, pathname: string): boolean =>
   href === "/" ? pathname === "/" : pathname === href || pathname.startsWith(`${href}/`);
 
 /**
- * Whether the current pathname matches an entry or any of its sub-entries.
- *
- * Sub-entries are the *planned* pages of a section: they are not rendered by
- * the header yet (their routes do not exist), but counting them keeps the
- * parent tab highlighted as soon as the visitor lands on any page of the
- * section tree.
+ * Whether the current pathname matches an entry or any of its sub-entries
+ * (the subjects of the section), so the parent tab stays highlighted on
+ * every page of the section tree.
  */
 function isNavItemActive(item: SiteNavigationItem, pathname: string): boolean {
   if (isPathActive(item.href, pathname)) return true;
@@ -41,25 +38,35 @@ function isNavItemActive(item: SiteNavigationItem, pathname: string): boolean {
  * Header of the MyGouv public portal.
  *
  * Main navigation — the permanent editorial architecture of the portal,
- * straight from the `site-structure` configuration:
+ * straight from the `site-structure` configuration (single source of truth):
  *
- *   Accueil
- *   Découvrir MyGouv   → the service, how it works, features, mobile
- *   Services           → the citizen-facing catalogue of public services
- *   Actualités         → news of the service (editorial content, coming)
- *   Aide               → support and documentation
- *   À propos           → institutional presentation of MyGouv
+ *   Accueil              → plain entry to the portal (always a link, never a
+ *                          dropdown)
+ *   Découvrir MyGouv     → MyGouv, Fonctionnement, Fonctionnalités,
+ *                          Sécurité & confidentialité
+ *   Services             → Tous les services, Par domaine, Par situation,
+ *                          Services populaires
+ *   Actualités           → Actualités, Nouveautés, Agenda, État du service
+ *   Aide                 → Centre d'aide, Premiers pas, Compte MyGouv,
+ *                          Sécurité
+ *   À propos             → Présentation, Mission, Gouvernance, Transparence
  *
- * Every entry is rendered as a plain link to its section landing page. The
- * `children` arrays of `primaryNavigation` describe the *planned* sub-pages
- * (future dropdown / mega-menu content): they are not rendered until their
- * routes actually exist, so the site never exposes broken links.
+ * Every section carrying `children` is rendered as an ADS `Menu` dropdown on
+ * desktop and as an expandable section in the mobile menu — the very same
+ * items feed both, so Desktop and Mobile always share one logical structure.
+ * `Accueil` has no children and stays a simple link. No navigation label or
+ * destination is hardcoded here: labels come from the message catalogs, hrefs
+ * from `site-structure.ts`.
+ *
+ * The header also carries the portal search (`PortalSearchBar` behaviour):
+ * a search input shown next to the actions on desktop, behind a magnifier
+ * button in the mobile menu, that submits to the localized `/search` route.
  *
  * The right side of the header carries the transversal actions, clearly
  * separated from the navigation:
  *  - “Se connecter” (`headerActions.signIn`), the primary action of the
- *    header: it is the transition towards the MyGouv personal space, hosted
- *    on the SSO domain;
+ *    header: the transition towards the MyGouv personal space, hosted on the
+ *    SSO domain;
  *  - the accessibility/display settings button of ADS.
  *
  * When the user is authenticated, the “Se connecter” action is hidden and a
@@ -70,23 +77,49 @@ function isNavItemActive(item: SiteNavigationItem, pathname: string): boolean {
 export function GovernmentHeader() {
   const t = useTranslations();
   const tPrimaryNav = useTranslations("nav.primary");
+  const tNavPanel = useTranslations("nav.panel");
   const tBrand = useTranslations("brand");
   const pathname = usePathname();
+  const router = useRouter();
 
-  const navigationItems: MainNavigationProps.Item[] = primaryNavigation.map(
-    (item: PrimaryNavigationItem) => ({
+  const navigationItems: MainNavigationProps.Item[] = primaryNavigation.map((item) => {
+    const children = item.children ?? [];
+
+    const common = {
       isActive: isNavItemActive(item, pathname),
       text: tPrimaryNav(item.labelKey),
-      linkProps: { href: item.href },
-    })
-  );
+    };
+
+    if (children.length === 0) {
+      // “Accueil” — a section without subjects stays a plain link.
+      return { ...common, linkProps: { href: item.href } };
+    }
+
+    // Sections with subjects open an ADS Menu; their label keys resolve
+    // under `nav.panel.<section>.<subject>`.
+    return {
+      ...common,
+      menuLinks: children.map((child) => ({
+        isActive: isNavItemActive(child, pathname),
+        text: tNavPanel(`${item.id}.${child.labelKey}`),
+        linkProps: { href: child.href },
+      })),
+    };
+  });
+
+  // Search action — submit to the localized /search route (shared with the
+  // standalone `PortalSearchBar`, see `getPortalSearchPath`).
+  const handleSearch = (text: string) => {
+    router.push(getPortalSearchPath(text));
+  };
 
   // Auth state for conditional account UI.
   const { isAuthenticated, isLoading: isAuthLoading } = useAuth();
 
-  // Quick-access items — transversal header actions, not navigation entries.
-  // “Se connecter” points to the SSO personal space when the visitor is not
-  // authenticated; it is replaced by the account menu once they are.
+  // Header actions — transversal actions, never navigation entries:
+  //  - “Se connecter” pointing to the SSO personal space when the visitor is
+  //    not authenticated (replaced by the account menu once they are);
+  //  - the ADS accessibility/display settings button.
   const quickAccessItems = React.useMemo<HeaderProps.QuickAccessItem[]>(() => {
     const items: HeaderProps.QuickAccessItem[] = [];
 
@@ -125,6 +158,10 @@ export function GovernmentHeader() {
         serviceTagline={t("header.serviceTagline")}
         navigation={navigationItems}
         quickAccessItems={quickAccessItems}
+        renderSearchInput={(params) => (
+          <input {...params} placeholder={t("meta.searchPlaceholder")} />
+        )}
+        onSearchButtonClick={handleSearch}
       />
       {/* Account menu — rendered outside the ADS Header so it can use
           its own dropdown positioning and auth state without conflicting
