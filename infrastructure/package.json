@@ -1,7 +1,7 @@
 {
-  "package": "@economie-gouv/infrastructure",
+  "package": "@mygouv/infrastructure",
   "version": "1.0.0",
-  "description": "Infrastructure and deployment configuration for Economie Gouv Ministry Website.",
+  "description": "Infrastructure and deployment configuration for MyGouv Website.",
   "main": "index.js",
   "scripts": {
     "build": "echo 'No build process for infrastructure'",

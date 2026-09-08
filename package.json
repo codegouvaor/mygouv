@@ -1,7 +1,7 @@
 {
-  "name": "economie-gouv",
+  "name": "mygouv",
   "version": "1.0.0",
-  "description": "Official information portal of the Government of Astoria.",
+  "description": "Official MyGouv.aor mobile app for secure access to digital identity, government services, and citizen data.",
   "private": true,
   "type": "module",
   "workspaces": [
@@ -68,7 +68,7 @@
   "packageManager": "pnpm@8.15.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/codegouvaor/economie.git"
+    "url": "https://github.com/codegouvaor/mygouv.git"
   },
   "keywords": [
     "news",
@@ -80,14 +80,14 @@
   ],
   "author": {
     "name": "Astoria Government Development Team",
-    "email": "developer@economie.gouv.aor",
-    "url": "https://economie.gouv.aor"
+    "email": "developer@mygouv.gouv.aor",
+    "url": "https://mygouv.gouv.aor"
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/codegouvaor/economie/issues"
+    "url": "https://github.com/codegouvaor/mygouv/issues"
   },
-  "homepage": "https://github.com/codegouvaor/economie#readme",
+  "homepage": "https://github.com/codegouvaor/mygouv#readme",
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
       "eslint --fix --quiet",
