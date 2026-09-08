@@ -63,7 +63,7 @@ export function LinkTile({ title, desc, href, small, grey, horizontal, iconId }:
       title={title}
       desc={desc}
       pictogram={
-        <span aria-hidden="true" className={iconId ?? "fr-icon-arrow-right-line"} />
+        iconId ? <span aria-hidden="true" className={iconId} /> : undefined
       }
       linkProps={{ href }}
     />

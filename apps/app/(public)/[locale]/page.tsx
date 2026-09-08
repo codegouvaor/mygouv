@@ -5,7 +5,7 @@ import { localizedAlternates, resolveLocaleParam } from "@/lib/localized-metadat
 import { getDomainUrl } from "@/lib/domains";
 import { headerActions } from "@/lib/site-structure";
 import {
-  benefits,
+  discoverLinks,
   explainerPoints,
   homePaths,
   lifeSituations,
@@ -17,6 +17,7 @@ import {
   LinkTile,
   NoticeCallout,
 } from "@/components/public/content/ads-fragments";
+import { PortalSearchBar } from "@/components/public/search/portal-search-bar";
 
 const HOME_PATH = "/";
 
@@ -168,22 +169,20 @@ function SectionHeading({
 }
 
 /**
- * Homepage of the MyGouv public portal — the official entry point towards
- * the public services of the Republic of Astoria.
+ * Homepage of the MyGouv public portal — the entry point towards the public
+ * services of the Republic of Astoria. It is an *orientation interface*: it
+ * answers “What can I do here?” before “What is MyGouv?”.
  *
- * The header lets visitors explore the portal (its six sections); this page
- * answers, in order:
- *
- *   01 Hero               — what MyGouv is, in one statement, and the
- *                           main actions (see the services, discover, log in)
+ *   01 Hero               — the portal search and the main entry to the
+ *                           services (sign in stays a secondary action)
  *   02 Accès rapide       — service areas, organised for the citizen
- *   03 Qu'est-ce que MyGouv ? — the role of the service, in five points
- *   04 Par situation      — life events, without knowing the administration
- *   05 Services populaires — the most used services
+ *   03 Par situation      — life events, without knowing the administration
+ *   04 Services populaires — the most used services
+ *   05 Qu'est-ce que MyGouv ? — the role of the service, in five steps
  *   06 Actualités         — news of MyGouv, kept secondary (no editorial
  *                           content yet, only the seam)
- *   07 Pourquoi MyGouv ?  — the benefits for the citizen
- *   08 Appel à l'action   — discover the services or log in to the space
+ *   07 Découvrir MyGouv   — the institutional content of the portal
+ *   08 Appel à l'action   — see the services or log in to the space
  *
  * Every section is driven by `lib/home-content.ts` and the message catalogs.
  * Destinations reuse the canonical routes of `site-structure.ts`: the page
@@ -201,7 +200,9 @@ export default async function HomePage({ params }: PageProps) {
 
   return (
     <>
-      {/* 01 — Hero: the official statement of MyGouv and its main actions. */}
+      {/* 01 — Hero: the portal search, the functional entry point of MyGouv.
+          The visitor finds a service before anything else; sign in stays a
+          secondary action. */}
       <section aria-labelledby="home-hero-title">
         <div
           style={{
@@ -211,7 +212,6 @@ export default async function HomePage({ params }: PageProps) {
             textAlign: "center",
           }}
         >
-          <p style={{ ...kickerStyle, marginInline: "auto" }}>{th("hero.kicker")}</p>
           <h1
             id="home-hero-title"
             style={{
@@ -236,7 +236,19 @@ export default async function HomePage({ params }: PageProps) {
           >
             {th("hero.lead")}
           </p>
-          <div style={{ marginTop: "2rem" }}>
+          <div
+            style={{
+              margin: "2rem auto 0",
+              maxWidth: "40rem",
+              textAlign: "left",
+            }}
+          >
+            <PortalSearchBar
+              label={th("hero.searchLabel")}
+              placeholder={th("hero.searchPlaceholder")}
+            />
+          </div>
+          <div style={{ marginTop: "1.25rem" }}>
             <CtaButtonsGroup
               alignment="center"
               buttons={[
@@ -246,20 +258,22 @@ export default async function HomePage({ params }: PageProps) {
                   priority: "primary",
                   iconId: "fr-icon-arrow-right-line",
                 },
-                {
-                  children: th("hero.discoverCta"),
-                  href: homePaths.discover,
-                  priority: "secondary",
-                },
-                {
-                  children: t("header.signIn"),
-                  href: signInHref,
-                  priority: "tertiary",
-                  iconId: "fr-icon-account-circle-line",
-                },
               ]}
             />
           </div>
+          <p
+            style={{
+              margin: "1.5rem auto 0",
+              fontSize: "0.9375rem",
+              lineHeight: 1.6,
+              color: "var(--ads-color-text-muted)",
+            }}
+          >
+            {th("hero.signInNote")}{" "}
+            <a href={signInHref} style={{ fontWeight: 600 }}>
+              {t("header.signIn")}
+            </a>
+          </p>
         </div>
       </section>
 
@@ -290,47 +304,7 @@ export default async function HomePage({ params }: PageProps) {
         </div>
       </section>
 
-      {/* 03 — Qu'est-ce que MyGouv ?: what the citizen can do with the
-          service, before any technical explanation. */}
-      <section aria-labelledby="home-explainer-title">
-        <div style={sectionContainerStyle}>
-          <SectionHeading
-            id="home-explainer-title"
-            kicker={th("explainer.kicker")}
-            title={th("explainer.title")}
-            lead={th("explainer.lead")}
-          />
-          <ul className="fr-grid-row fr-grid-row--gutters" role="list" style={listResetStyle}>
-            {explainerPoints.map((point) => (
-              <li key={point.key} className="fr-col-12 fr-col-md-6">
-                <div style={featureCardStyle}>
-                  <span
-                    className={point.iconId}
-                    aria-hidden="true"
-                    style={{ fontSize: "1.5rem", lineHeight: 1, color: "var(--ads-color-primary)" }}
-                  />
-                  <h3 style={featureTitleStyle}>{th(`explainer.items.${point.key}.title`)}</h3>
-                  <p style={featureDescStyle}>{th(`explainer.items.${point.key}.desc`)}</p>
-                </div>
-              </li>
-            ))}
-          </ul>
-          <div style={{ marginTop: "1.75rem" }}>
-            <CtaButtonsGroup
-              buttons={[
-                {
-                  children: th("explainer.cta"),
-                  href: homePaths.discover,
-                  priority: "secondary",
-                  iconId: "fr-icon-arrow-right-line",
-                },
-              ]}
-            />
-          </div>
-        </div>
-      </section>
-
-      {/* 04 — Par situation: find the service without knowing which
+      {/* 03 — Par situation: find the service without knowing which
           administration is responsible. */}
       <section
         aria-labelledby="home-situations-title"
@@ -351,7 +325,6 @@ export default async function HomePage({ params }: PageProps) {
                   href={situation.href}
                   horizontal
                   small
-                  iconId="fr-icon-arrow-right-line"
                 />
               </li>
             ))}
@@ -359,7 +332,7 @@ export default async function HomePage({ params }: PageProps) {
         </div>
       </section>
 
-      {/* 05 — Services populaires: the most used services of the portal. */}
+      {/* 04 — Services populaires: the most used services of the portal. */}
       <section aria-labelledby="home-popular-title">
         <div style={sectionContainerStyle}>
           <SectionHeading
@@ -393,6 +366,60 @@ export default async function HomePage({ params }: PageProps) {
         </div>
       </section>
 
+      {/* 05 — Qu'est-ce que MyGouv ?: the role of the service, presented as
+          the citizen's natural journey (search → understand → do → track →
+          find again). More pedagogical than promotional. */}
+      <section aria-labelledby="home-explainer-title">
+        <div style={sectionContainerStyle}>
+          <SectionHeading
+            id="home-explainer-title"
+            kicker={th("explainer.kicker")}
+            title={th("explainer.title")}
+            lead={th("explainer.lead")}
+          />
+          <ul className="fr-grid-row fr-grid-row--gutters" role="list" style={listResetStyle}>
+            {explainerPoints.map((point, index) => (
+              <li key={point.key} className="fr-col-12 fr-col-md-6">
+                <div style={featureCardStyle}>
+                  <span
+                    className={point.iconId}
+                    aria-hidden="true"
+                    style={{ fontSize: "1.5rem", lineHeight: 1, color: "var(--ads-color-primary)" }}
+                  />
+                  <h3 style={featureTitleStyle}>
+                    <span
+                      aria-hidden="true"
+                      style={{
+                        display: "inline-block",
+                        marginRight: "0.5rem",
+                        color: "var(--ads-color-primary)",
+                        fontVariantNumeric: "tabular-nums",
+                      }}
+                    >
+                      {index + 1}.
+                    </span>
+                    {th(`explainer.items.${point.key}.title`)}
+                  </h3>
+                  <p style={featureDescStyle}>{th(`explainer.items.${point.key}.desc`)}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
+          <div style={{ marginTop: "1.75rem" }}>
+            <CtaButtonsGroup
+              buttons={[
+                {
+                  children: th("explainer.cta"),
+                  href: homePaths.discover,
+                  priority: "secondary",
+                  iconId: "fr-icon-arrow-right-line",
+                },
+              ]}
+            />
+          </div>
+        </div>
+      </section>
+
       {/* 06 — Actualités: secondary on purpose. No editorial content exists
           yet; the section only carries the seam (message + destination). */}
       <section
@@ -422,27 +449,36 @@ export default async function HomePage({ params }: PageProps) {
         </div>
       </section>
 
-      {/* 07 — Pourquoi utiliser MyGouv ?: the benefits, kept sober and
-          citizen-centred. */}
-      <section aria-labelledby="home-benefits-title">
+      {/* 07 — Découvrir MyGouv: the institutional content of the portal,
+          discrete and reusing the `discover` destinations of the header /
+          `site-structure.ts` (no independent navigation here). */}
+      <section aria-labelledby="home-discover-title">
         <div style={sectionContainerStyle}>
           <SectionHeading
-            id="home-benefits-title"
-            kicker={th("benefits.kicker")}
-            title={th("benefits.title")}
+            id="home-discover-title"
+            kicker={th("discover.kicker")}
+            title={th("discover.title")}
+            lead={th("discover.lead")}
+            actions={
+              <CtaButtonsGroup
+                buttons={[
+                  {
+                    children: th("discover.cta"),
+                    href: homePaths.discover,
+                    priority: "secondary",
+                    iconId: "fr-icon-arrow-right-line",
+                  },
+                ]}
+              />
+            }
           />
           <ul className="fr-grid-row fr-grid-row--gutters" role="list" style={listResetStyle}>
-            {benefits.map((benefit) => (
-              <li key={benefit.key} className="fr-col-12 fr-col-md-6 fr-col-lg-4">
-                <div style={featureCardStyle}>
-                  <span
-                    className={benefit.iconId}
-                    aria-hidden="true"
-                    style={{ fontSize: "1.5rem", lineHeight: 1, color: "var(--ads-color-primary)" }}
-                  />
-                  <h3 style={featureTitleStyle}>{th(`benefits.items.${benefit.key}.title`)}</h3>
-                  <p style={featureDescStyle}>{th(`benefits.items.${benefit.key}.desc`)}</p>
-                </div>
+            {discoverLinks.map((item) => (
+              <li key={item.key} className="fr-col-12 fr-col-md-6 fr-col-lg-4">
+                <LinkTile
+                  title={th(`discover.items.${item.key}`)}
+                  href={item.href}
+                />
               </li>
             ))}
           </ul>
@@ -482,15 +518,22 @@ export default async function HomePage({ params }: PageProps) {
                   priority: "primary",
                   iconId: "fr-icon-arrow-right-line",
                 },
-                {
-                  children: t("header.signIn"),
-                  href: signInHref,
-                  priority: "secondary",
-                  iconId: "fr-icon-account-circle-line",
-                },
               ]}
             />
           </div>
+          <p
+            style={{
+              margin: "1.5rem auto 0",
+              fontSize: "0.9375rem",
+              lineHeight: 1.6,
+              color: "var(--ads-color-text-muted)",
+            }}
+          >
+            {th("cta.signInNote")}{" "}
+            <a href={signInHref} style={{ fontWeight: 600 }}>
+              {t("header.signIn")}
+            </a>
+          </p>
         </div>
       </section>
     </>

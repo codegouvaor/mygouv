@@ -115,19 +115,20 @@
       "cookies": "Cookie management",
       "publications": "Official publications"
     },
-    "license": "Unless otherwise stated, all content on this site is available under the <link>etalab-2.0 licence</link>."
+    "license": "Unless otherwise stated, all content on this site is available under the <link>APSL licence</link>."
   },
   "home": {
     "hero": {
-      "kicker": "The digital public service of the Republic of Astoria",
       "title": "Public services, simply.",
-      "lead": "MyGouv lets you access public services, complete your procedures, find your documents and track your requests from a single space.",
-      "servicesCta": "Browse services",
-      "discoverCta": "Discover MyGouv"
+      "lead": "Find a procedure or a public service without having to know which administration is responsible for it.",
+      "searchLabel": "Search for a public service",
+      "searchPlaceholder": "What are you looking for?",
+      "servicesCta": "Browse all services",
+      "signInNote": "Already have a MyGouv account?"
     },
     "domains": {
       "kicker": "Quick access",
-      "title": "Your services by area",
+      "title": "Quick access to services",
       "lead": "Find public services by area — no need to know which administration is responsible.",
       "items": {
         "etatCivil": "Civil registration",
@@ -171,7 +172,7 @@
     },
     "situations": {
       "kicker": "By life event",
-      "title": "A service for your situation",
+      "title": "I am in this situation",
       "lead": "Tell us about your situation to find the right service — you do not need to know which administration is in charge.",
       "items": {
         "creerEntreprise": "I am starting a business",
@@ -187,7 +188,7 @@
     "popular": {
       "kicker": "Most used",
       "title": "Popular services",
-      "lead": "The most common procedures for citizens.",
+      "lead": "The most searched services on MyGouv.",
       "items": {
         "carteIdentite": "Identity card",
         "passeport": "Passport",
@@ -206,36 +207,22 @@
       "empty": "MyGouv news will be published here soon.",
       "allCta": "All news"
     },
-    "benefits": {
-      "kicker": "Why MyGouv?",
-      "title": "Why use MyGouv?",
+    "discover": {
+      "kicker": "Discover MyGouv",
+      "title": "Discover MyGouv",
+      "lead": "How does MyGouv work? What are its features? How is your data protected?",
+      "cta": "Discover MyGouv",
       "items": {
-        "espaceUnique": {
-          "title": "One single space",
-          "desc": "Find all your public services through a common interface, without juggling multiple accounts."
-        },
-        "identiteSecurisee": {
-          "title": "A secure identity",
-          "desc": "Use your digital identity to access services that require authentication."
-        },
-        "demarches": {
-          "title": "Your procedures in one place",
-          "desc": "Find your requests, documents and notifications in a single place."
-        },
-        "experienceCoherente": {
-          "title": "A consistent experience",
-          "desc": "Public services share a common, accessible and consistent digital experience."
-        },
-        "accessiblePartout": {
-          "title": "Available everywhere",
-          "desc": "Access MyGouv from your computer or your mobile device, at your own pace."
-        }
+        "fonctionnement": "How does MyGouv work?",
+        "fonctionnalites": "Its features",
+        "securiteConfidentialite": "Security and privacy"
       }
     },
     "cta": {
-      "title": "Ready to use MyGouv?",
-      "lead": "Discover the available public services or log in to your personal space to track your procedures.",
-      "servicesCta": "Discover the services"
+      "title": "Public services are accessible from MyGouv.",
+      "lead": "Find, complete and track your procedures online, wherever you are.",
+      "servicesCta": "Browse services",
+      "signInNote": "Do you have a MyGouv account?"
     }
   },
   "stayInTouch": {

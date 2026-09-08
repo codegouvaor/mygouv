@@ -115,20 +115,21 @@
       "cookies": "Gestion des cookies",
       "publications": "Publications officielles"
     },
-    "license": "Sauf mention contraire, tous les contenus de ce site sont sous <link>licence etalab-2.0</link>."
+    "license": "Sauf mention contraire, tous les contenus de ce site sont sous <link>licence APSL</link>."
   },
   "home": {
     "hero": {
-      "kicker": "Le service public numérique de la République d'Astoria",
       "title": "Les services publics, simplement.",
-      "lead": "MyGouv vous permet d'accéder aux services publics, d'effectuer vos démarches, de retrouver vos documents et de suivre vos demandes depuis un même espace.",
-      "servicesCta": "Voir les services",
-      "discoverCta": "Découvrir MyGouv"
+      "lead": "Trouvez une démarche ou un service public sans avoir à connaître l'administration qui en est responsable.",
+      "searchLabel": "Rechercher un service public",
+      "searchPlaceholder": "Que recherchez-vous ?",
+      "servicesCta": "Voir tous les services",
+      "signInNote": "Vous avez déjà un compte MyGouv ?"
     },
     "domains": {
       "kicker": "Accès rapide",
-      "title": "Vos services par domaine",
-      "lead": "Retrouvez les services publics par domaine, sans avoir à connaître l'administration responsable.",
+      "title": "Accéder rapidement aux services",
+      "lead": "Trouvez les services publics par domaine, sans avoir à connaître l'administration responsable.",
       "items": {
         "etatCivil": "État civil",
         "entreprises": "Entreprises",
@@ -171,7 +172,7 @@
     },
     "situations": {
       "kicker": "Par situation",
-      "title": "Un service selon votre situation",
+      "title": "Je suis dans cette situation",
       "lead": "Décrivez votre situation pour trouver le service adapté : inutile de connaître l'administration compétente.",
       "items": {
         "creerEntreprise": "Je crée mon entreprise",
@@ -187,7 +188,7 @@
     "popular": {
       "kicker": "Les plus utilisés",
       "title": "Services populaires",
-      "lead": "Les démarches les plus fréquentes des citoyens.",
+      "lead": "Les services les plus recherchés sur MyGouv.",
       "items": {
         "carteIdentite": "Carte d'identité",
         "passeport": "Passeport",
@@ -206,36 +207,22 @@
       "empty": "Les actualités de MyGouv seront publiées ici prochainement.",
       "allCta": "Toutes les actualités"
     },
-    "benefits": {
-      "kicker": "Pourquoi MyGouv ?",
-      "title": "Pourquoi utiliser MyGouv ?",
+    "discover": {
+      "kicker": "Découvrir MyGouv",
+      "title": "Découvrir MyGouv",
+      "lead": "Comment fonctionne MyGouv ? Quelles sont ses fonctionnalités ? Comment vos données sont-elles protégées ?",
+      "cta": "Découvrir MyGouv",
       "items": {
-        "espaceUnique": {
-          "title": "Un seul espace",
-          "desc": "Retrouvez tous vos services publics depuis une interface commune, sans cumuler les comptes."
-        },
-        "identiteSecurisee": {
-          "title": "Une identité sécurisée",
-          "desc": "Utilisez votre identité numérique pour accéder aux services qui nécessitent une authentification."
-        },
-        "demarches": {
-          "title": "Vos démarches au même endroit",
-          "desc": "Retrouvez vos demandes, vos documents et vos notifications en un seul lieu."
-        },
-        "experienceCoherente": {
-          "title": "Une expérience cohérente",
-          "desc": "Les services publics partagent une expérience numérique commune, accessible et homogène."
-        },
-        "accessiblePartout": {
-          "title": "Accessible partout",
-          "desc": "Accédez à MyGouv depuis votre ordinateur ou votre appareil mobile, à votre rythme."
-        }
+        "fonctionnement": "Comment fonctionne MyGouv ?",
+        "fonctionnalites": "Ses fonctionnalités",
+        "securiteConfidentialite": "Sécurité et confidentialité"
       }
     },
     "cta": {
-      "title": "Prêt à utiliser MyGouv ?",
-      "lead": "Découvrez les services publics disponibles ou connectez-vous à votre espace personnel pour suivre vos démarches.",
-      "servicesCta": "Découvrir les services"
+      "title": "Les services publics sont accessibles depuis MyGouv.",
+      "lead": "Retrouvez, effectuez et suivez vos démarches en ligne, où que vous soyez.",
+      "servicesCta": "Voir les services",
+      "signInNote": "Vous avez un compte MyGouv ?"
     }
   },
   "stayInTouch": {

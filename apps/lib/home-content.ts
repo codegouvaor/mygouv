@@ -14,7 +14,7 @@
  * needs to change.
  */
 import type { FrIconClassName } from "@codegouvaor/react-ads/fr";
-import { sectionPaths } from "./site-structure";
+import { primaryNavigation, sectionPaths } from "./site-structure";
 
 /** Canonical destinations of the public portal (mirrors `primaryNavigation`). */
 export const homePaths = {
@@ -31,6 +31,22 @@ export type HomeEntry = {
   href: string;
   iconId?: FrIconClassName;
 };
+
+/**
+ * “Découvrir MyGouv” destinations of the homepage.
+ *
+ * Derived straight from the `discover` section of `site-structure.ts` (the
+ * single source of truth of the portal architecture) so the homepage never
+ * re-creates an independent navigation: when a subject page ships, only the
+ * configuration changes. The overview entry (“MyGouv”, which points back to
+ * the section root) is skipped — the section carries its own “Découvrir
+ * MyGouv” call to action.
+ */
+const discoverSection = primaryNavigation.find((item) => item.id === "discover");
+export const discoverLinks: ReadonlyArray<HomeEntry> =
+  (discoverSection?.children ?? [])
+    .filter((child) => child.labelKey !== "mygouv")
+    .map((child) => ({ key: child.labelKey, href: child.href }));
 
 /** Quick-access domains — citizen-oriented service areas, not ministries. */
 export const serviceDomains: ReadonlyArray<HomeEntry> = [
@@ -75,13 +91,4 @@ export const popularServices: ReadonlyArray<HomeEntry> = [
   { key: "declarerRevenus", href: homePaths.services },
   { key: "demanderAllocation", href: homePaths.services },
   { key: "consulterDocuments", href: homePaths.services },
-];
-
-/** Why-use-MyGouv benefits (explanatory, non-navigational). */
-export const benefits: ReadonlyArray<{ key: string; iconId: FrIconClassName }> = [
-  { key: "espaceUnique", iconId: "fr-icon-layout-grid-line" },
-  { key: "identiteSecurisee", iconId: "fr-icon-fingerprint-line" },
-  { key: "demarches", iconId: "fr-icon-check-line" },
-  { key: "experienceCoherente", iconId: "fr-icon-refresh-line" },
-  { key: "accessiblePartout", iconId: "fr-icon-smartphone-line" },
 ];
